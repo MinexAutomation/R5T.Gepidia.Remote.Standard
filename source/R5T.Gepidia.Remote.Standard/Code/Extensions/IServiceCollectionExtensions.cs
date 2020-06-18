@@ -16,7 +16,7 @@ namespace R5T.Gepidia.Remote.Standard
         /// Adds the <see cref="IRemoteFileSystemOperator"/> service.
         /// </summary>
         public static IServiceCollection AddRemoteFileSystemOperator(this IServiceCollection services,
-            ServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
+            IServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
         {
             services.AddRemoteFileSystemOperator(
                 services.AddSftpClientWrapperProviderAction(
@@ -29,8 +29,8 @@ namespace R5T.Gepidia.Remote.Standard
         /// <summary>
         /// Adds the <see cref="IRemoteFileSystemOperator"/> service.
         /// </summary>
-        public static ServiceAction<IRemoteFileSystemOperator> AddRemoteFileSystemOperatorAction(this IServiceCollection services,
-            ServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
+        public static IServiceAction<IRemoteFileSystemOperator> AddRemoteFileSystemOperatorAction(this IServiceCollection services,
+            IServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
         {
             var serviceAction = new ServiceAction<IRemoteFileSystemOperator>(() => services.AddRemoteFileSystemOperator(
                 addAwsEc2ServerHostFriendlyNameProvider));
@@ -41,7 +41,7 @@ namespace R5T.Gepidia.Remote.Standard
         /// Adds the local-based <see cref="IFileSystemOperator"/> service.
         /// </summary>
         public static IServiceCollection AddFileSystemOperator(this IServiceCollection services,
-            ServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
+            IServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
         {
             services.AddRemoteBasedFileSystemOperator(
                 services.AddRemoteFileSystemOperatorAction(
@@ -53,8 +53,8 @@ namespace R5T.Gepidia.Remote.Standard
         /// <summary>
         /// Adds the local-based <see cref="IFileSystemOperator"/> service.
         /// </summary>
-        public static ServiceAction<IFileSystemOperator> AddFileSystemOperatorAction(this IServiceCollection services,
-            ServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
+        public static IServiceAction<IFileSystemOperator> AddFileSystemOperatorAction(this IServiceCollection services,
+            IServiceAction<IAwsEc2ServerHostFriendlyNameProvider> addAwsEc2ServerHostFriendlyNameProvider)
         {
             var serviceAction = new ServiceAction<IFileSystemOperator>(() => services.AddFileSystemOperator(
                 addAwsEc2ServerHostFriendlyNameProvider));
